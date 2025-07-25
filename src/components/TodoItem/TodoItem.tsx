@@ -1,4 +1,6 @@
-function TodoItem({text}: any) {
+import {format} from 'date-fns/format';
+
+function TodoItem({text, date}: any) {
     return (
         <div className="task-card bg-white border border-gray-100 rounded-lg p-4 shadow-sm flex items-start">
             <label className="checkbox-container mt-1 mr-3 flex-shrink-0">
@@ -25,7 +27,7 @@ function TodoItem({text}: any) {
                     <div className="w-4 h-4 flex items-center justify-center mr-1">
                         <i className="ri-calendar-line"></i>
                     </div>
-                    <span>Due: July 10, 2025</span>
+                    <span>{format(date, 'dd.MM.yyyy')}</span>
                 </div>
             </div>
         </div>

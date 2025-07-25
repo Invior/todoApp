@@ -32,7 +32,7 @@ function TodoList() {
        {isLoaded ? (
          <div id="task-list" className="px-6 py-4 space-y-3">
             {todos.length > 0 && todos.map((todo) => (
-                <TodoItem key={todo.id} text={todo.text} />
+                <TodoItem key={todo.id} text={todo.text} date={todo.createdAt}/>
             ))}
         </div>
        ) : (
