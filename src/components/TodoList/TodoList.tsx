@@ -1,6 +1,6 @@
-import TodoItem from "../TodoItem/TodoItem"
-import { fetchTodos } from "../../api/todos.ts"
-import { useEffect, useState } from "react"
+import TodoItem from "../TodoItem/TodoItem";
+import { fetchTodos, deleteTodo } from "../../api/todos.ts";
+import { useEffect, useState } from "react";
 
 interface TodoType {
     id: number;
@@ -10,36 +10,49 @@ interface TodoType {
 }
 
 function TodoList() {
-    const [todos, setTodos] = useState<TodoType[]>([])
+    const [todos, setTodos] = useState<TodoType[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
+    function handleDeleteTodo(id: number) {
+        deleteTodo(id)
+            .then(() => {
+                setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id)); // Фильтруем удалённую задачу
+            })
+            .catch(error => console.error("Error deleting todo:", error));
+    }
+
     useEffect(() => {
-    fetchTodos()
-    .then(function(response) {
-        if (response) {
-            setTodos(response.data);
-            console.log(response.data);
-        }
-    })
-    .catch(error => console.error('Error fetching todos:', error))
-    .finally(() => {
-        setIsLoaded(true);
-    });
-}, []);
+        fetchTodos()
+            .then(response => {
+                if (response) {
+                    setTodos(response.data);
+                }
+            })
+            .catch(error => console.error("Error fetching todos:", error))
+            .finally(() => {
+                setIsLoaded(true);
+            });
+    }, []);
 
     return (
         <>
-       {isLoaded ? (
-         <div id="task-list" className="px-6 py-4 space-y-3">
-            {todos.length > 0 && todos.map((todo) => (
-                <TodoItem key={todo.id} text={todo.text} date={todo.createdAt}/>
-            ))}
-        </div>
-       ) : (
-            <div>Loading...</div>
-       )}
-       </>
-    )
+            {isLoaded ? (
+                <div id="task-list" className="px-6 py-4 space-y-3">
+                    {todos.length > 0 && todos.map((todo) => (
+                        <TodoItem
+                            key={todo.id}
+                            id={todo.id}
+                            text={todo.text}
+                            date={todo.createdAt}
+                            deleteTask={handleDeleteTodo}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <div>Loading...</div>
+            )}
+        </>
+    );
 }
 
-export default TodoList
+export default TodoList;

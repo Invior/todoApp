@@ -1,6 +1,13 @@
 import {format} from 'date-fns/format';
 
-function TodoItem({text, date}: any) {
+interface TodoItemProps {
+    id: number;
+    text: string;
+    date: string;
+    deleteTask: (id: number) => void;
+}
+
+function TodoItem({text, date, deleteTask, id}: TodoItemProps) {
     return (
         <div className="task-card bg-white border border-gray-100 rounded-lg p-4 shadow-sm flex items-start">
             <label className="checkbox-container mt-1 mr-3 flex-shrink-0">
@@ -16,7 +23,7 @@ function TodoItem({text, date}: any) {
                                 Изменить
                             </div>
                         </button>
-                        <button className="p-1 text-gray-400 hover:text-red-500 whitespace-nowrap">
+                        <button onClick={() => deleteTask(id)} className="p-1 text-gray-400 hover:text-red-500 whitespace-nowrap">
                             <div className="w-6 h-6 flex items-center justify-center">
                                 Удалить
                             </div>

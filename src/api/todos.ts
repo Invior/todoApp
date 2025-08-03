@@ -16,3 +16,12 @@ export const createTodo = async (text: string) => {
         throw error;
     }
 }
+
+export const deleteTodo = async (id: number) => {
+    try {
+        await axios.delete(`${API_URL}/todos/${id}`);
+    } catch (error) {
+        console.error('Error deleting todo:', error);
+        throw error;
+    }
+}
