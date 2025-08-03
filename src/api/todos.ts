@@ -25,3 +25,23 @@ export const deleteTodo = async (id: number) => {
         throw error;
     }
 }
+
+export const toggleTodo = async (id: number, completed: boolean) => {
+    try {
+        const response = await axios.patch(`${API_URL}/todos/${id}/toggle`, { completed });
+        return response.data;
+    } catch (error) {
+        console.error('Error toggling todo:', error);
+        throw error;
+    }
+}
+
+export const changeTodoText = async (id: number, text: string) => {
+    try {
+        const response = await axios.put(`${API_URL}/todos/${id}`, { text });
+        return response.data;
+    } catch (error) {
+        console.error('Error changing todo text:', error);
+        throw error;
+    }
+}
