@@ -10,7 +10,7 @@ function TodoItem({text, date}: any) {
             <div className="flex-grow">
                 <div className="flex items-center justify-between">
                     <h3 className="font-medium text-gray-800">{text}</h3>
-                    <div className="flex items-center task-actions">
+                    <div className="flex items-center task-actions gap-[50px] mr-[20px]">
                         <button className="p-1 text-gray-400 hover:text-gray-600 whitespace-nowrap">
                             <div className="w-6 h-6 flex items-center justify-center">
                                 Изменить
