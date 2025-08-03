@@ -5,20 +5,23 @@ interface TodoItemProps {
     text: string;
     date: string;
     deleteTask: (id: number) => void;
+    completed: boolean
+    toggleTask: (id: number) => void
+    openChangeModal: (id: number) => void
 }
 
-function TodoItem({text, date, deleteTask, id}: TodoItemProps) {
+function TodoItem({text, date, deleteTask, id, completed, toggleTask, openChangeModal}: TodoItemProps) {
     return (
         <div className="task-card bg-white border border-gray-100 rounded-lg p-4 shadow-sm flex items-start">
             <label className="checkbox-container mt-1 mr-3 flex-shrink-0">
-                <input type="checkbox" className="custom-checkbox" />
+                <input type="checkbox" className="custom-checkbox" onChange={() => toggleTask(id)} checked={completed}/>
                 <span className="checkmark"></span>
             </label>
             <div className="flex-grow">
                 <div className="flex items-center justify-between">
-                    <h3 className="font-medium text-gray-800">{text}</h3>
+                    {completed ? <h3 className="font-medium text-gray-800 line-through">{text}</h3> : <h3 className="font-medium text-gray-800">{text}</h3>}
                     <div className="flex items-center task-actions gap-[50px] mr-[20px]">
-                        <button className="p-1 text-gray-400 hover:text-gray-600 whitespace-nowrap">
+                        <button onClick={() => openChangeModal(id)} className="p-1 text-gray-400 hover:text-gray-600 whitespace-nowrap">
                             <div className="w-6 h-6 flex items-center justify-center">
                                 Изменить
                             </div>
