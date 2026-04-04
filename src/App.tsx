@@ -1,6 +1,7 @@
-import './App.css'
-import Header from "./components/Header/Header.tsx"
-import TodoList from "./components/TodoList/TodoList.tsx"
+import { Header } from './components/Header';
+import { TodoList } from './components/TodoList';
+
+import './App.css';
 
 function App() {
   return (

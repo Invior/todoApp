@@ -1,13 +1,23 @@
-import TodoItem from '../TodoItem/TodoItem';
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import EditTodo from '../EditTodo/EditTodo';
-import Pagination from '@mui/material/Pagination';
-import { useAppSelector, useAppDispatch } from '../../redux/hooks.ts';
-import { getTodos, selectTodosData, setCurrentPage, setLimit, deleteThisTodo, toggleThisTodo } from '../../redux/slices/todoSlice';
-import type { TodoType } from '../../redux/slices/todoSlice.ts';
 
-function TodoList() {
+import Pagination from '@mui/material/Pagination';
+
+import { EditTodo } from '../EditTodo';
+import { TodoItem } from '../TodoItem';
+
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import type { TodoType } from '@/redux/slices/todoSlice';
+import {
+  deleteThisTodo,
+  getTodos,
+  selectTodosData,
+  setCurrentPage,
+  setLimit,
+  toggleThisTodo,
+} from '@/redux/slices/todoSlice';
+
+export const TodoList = () => {
   const dispatch = useAppDispatch();
   const { data, status, page, limit, totalPages } = useAppSelector(selectTodosData);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -26,7 +36,7 @@ function TodoList() {
   function handleToggleTodo(id: number) {
     const todoToUpdate = data.find((todo) => todo.id === id);
     if (!todoToUpdate) return;
-    dispatch(toggleThisTodo({ id: id, completed: !todoToUpdate.completed}));
+    dispatch(toggleThisTodo({ id: id, completed: !todoToUpdate.completed }));
   }
 
   function handleDeleteTodo(id: number) {
@@ -50,7 +60,8 @@ function TodoList() {
               <option value="10">10 задач на странице</option>
               <option value="20">20 задач на странице</option>
             </select>
-            {Array.isArray(data) && data.length > 0 &&
+            {Array.isArray(data) &&
+              data.length > 0 &&
               data.map((todo: TodoType) => (
                 <TodoItem
                   key={todo.id}
@@ -84,4 +95,3 @@ function TodoList() {
   );
 }
 
-export default TodoList;

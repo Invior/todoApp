@@ -10,7 +10,7 @@ interface TodoItemProps {
     openChangeModal: (id: number) => void
 }
 
-function TodoItem({text, date, deleteTask, id, completed, toggleTask, openChangeModal}: TodoItemProps) {
+export const TodoItem = ({text, date, deleteTask, id, completed, toggleTask, openChangeModal}: TodoItemProps) => {
     return (
         <div className="task-card bg-white border border-gray-100 rounded-lg p-4 shadow-sm flex items-start">
             <label className="checkbox-container mt-1 mr-3 flex-shrink-0">
@@ -43,5 +43,3 @@ function TodoItem({text, date, deleteTask, id, completed, toggleTask, openChange
         </div>
     )
 }
-
-export default TodoItem

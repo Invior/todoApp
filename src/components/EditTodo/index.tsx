@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { useAppDispatch } from '../../redux/hooks.ts';
-import { editTextTodo } from '../../redux/slices/todoSlice';
+
+import { useAppDispatch } from '@/redux/hooks';
+import { editTextTodo } from '@/redux/slices/todoSlice';
 
 interface ChangeTodoProps {
   id: number | null;
   closeModal: () => void;
 }
 
-function EditTodo({ id, closeModal }: ChangeTodoProps) {
+export const EditTodo = ({ id, closeModal }: ChangeTodoProps) => {
   const [task, setTask] = useState<string>('');
   const dispatch = useAppDispatch();
 
@@ -70,4 +71,3 @@ function EditTodo({ id, closeModal }: ChangeTodoProps) {
   );
 }
 
-export default EditTodo;

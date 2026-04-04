@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Modal from "react-modal";
-import AddTodo from "../AddTodo/AddTodo";
 
-function Header() {
+import { AddTodo } from "../AddTodo";
+
+export const Header = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const openModal = () => {
@@ -27,5 +28,3 @@ function Header() {
         </div>
     )
 }
-
-export default Header

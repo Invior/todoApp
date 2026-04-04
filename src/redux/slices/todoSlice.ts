@@ -1,6 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { fetchTodos, createTodo, deleteTodo, toggleTodo, changeTodoText } from '../../api/todos';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
+import { changeTodoText,createTodo, deleteTodo, fetchTodos, toggleTodo } from '../../api/todos';
 import type { RootState } from '../store';
 
 export interface TodoType {

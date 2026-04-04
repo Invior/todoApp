@@ -1,12 +1,13 @@
-import { useState } from "react";
-import { createNewTodo } from "../../redux/slices/todoSlice";
-import { useAppDispatch } from "../../redux/hooks";
+import { useState } from 'react';
+
+import { useAppDispatch } from '@/redux/hooks';
+import { createNewTodo } from '@/redux/slices/todoSlice';
 
 interface AddTodoProps {
     closeModal: () => void;
 }
 
-function AddTodo({ closeModal }: AddTodoProps) {
+export const AddTodo = ({ closeModal }: AddTodoProps) => {
     const [text, setText] = useState<string>("");
     const dispatch = useAppDispatch();
 
@@ -52,5 +53,3 @@ function AddTodo({ closeModal }: AddTodoProps) {
         </div>
     );
 }
-
-export default AddTodo;
