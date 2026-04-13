@@ -1,20 +1,20 @@
-import { useState } from "react";
-import { createTodo } from "../../api/todos";
+import { useState } from 'react';
 
-function AddTodo({ closeModal }: any) {
-    const [task, setTask] = useState<string>("");
+import { useAppDispatch } from '@/redux/hooks';
+import { createNewTodo } from '@/redux/slices/todoSlice';
+
+interface AddTodoProps {
+    closeModal: () => void;
+}
+
+export const AddTodo = ({ closeModal }: AddTodoProps) => {
+    const [text, setText] = useState<string>("");
+    const dispatch = useAppDispatch();
 
     // Функция обработки отправки формы
     async function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
-
-        try {
-            await createTodo(task);
-            setTask("");
-            closeModal();
-        } catch (err) {
-            console.error("Ошибка при создании задачи:", err);
-        }
+        dispatch(createNewTodo({ text }))
     }
 
     return (
@@ -33,8 +33,8 @@ function AddTodo({ closeModal }: any) {
                         <label className="block text-sm font-medium text-gray-700 mb-1"></label>
                         <input
                             type="text"
-                            value={task} 
-                            onChange={(event) => setTask(event.target.value)}
+                            value={text} 
+                            onChange={(event) => setText(event.target.value)}
                             className="w-full px-3 py-2 border border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                             placeholder="Введите текст задачи"
                             required
@@ -53,5 +53,3 @@ function AddTodo({ closeModal }: any) {
         </div>
     );
 }
-
-export default AddTodo;
